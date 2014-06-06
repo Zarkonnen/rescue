@@ -6,14 +6,66 @@
         <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     </head>
     <body>
-        A demonstration of a HTML5 game loop. I hereby release this into the public domain or its nearest equivalent.<br>
-        <canvas width="800" height="600" id="gameCanvas"></canvas>
+        <canvas width="800" height="800" id="gameCanvas"></canvas>
         <script>
 
 /** THE GAME ITSELF **********************************************************/
 
 // Game state:
-// TODO
+var directions = [
+  { name: "North", dx:  0, dy: -1 },
+  { name: "South", dx:  0, dy:  1 },
+  { name: "East",  dx:  1, dy:  0 },
+  { name: "West",  dx: -1, dy:  0 }
+];
+
+var tileTypes = {
+    forest: {
+        flammable: 3,
+        color: "#339933",
+        passable: true,
+        people: 0.1
+    },
+    building: {
+        flammable: 2,
+        color: "#999999",
+        passable: true,
+        people: 2.5
+    },
+    fields: {
+        flammable: 1,
+        color: "#66ee44",
+        passable: true,
+        people: 0.5
+    },
+    rubble: {
+        flammable: 0,
+        color: "#443333",
+        passable: true,
+        people: 0
+    },
+    river: {
+        flammable: 0,
+        color: "#6666ee",
+        passable: false,
+        people: 0
+    },
+};
+
+var unitTypes = {
+    
+};
+
+var g = null;
+
+function reset() {
+    g = {
+        tiles: [],
+        units: []
+    };
+}
+
+reset();
 
 function input(msSinceLastUpdate) {
     // TODO
