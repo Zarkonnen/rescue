@@ -101,7 +101,55 @@ function reset() {
 }
 
 function mapgen(g) {
-    
+    // Init tiles
+    var tiles = [];
+    g.tiles = tiles;
+    for (var y = 0; y < 10; y++) {
+        var row = [];
+        tiles.push(row);
+        for (var x = 0; x < 10; x++) {
+            row.push(0);
+        }
+    }
+    // Put down seeds
+    for (var i = 0; i < 10; i++) {
+        tiles[rint(0, 10)][rint(0, 10)] = 2;
+    }
+    // Random walk seeds
+    for (var i = 0; i < 10; i++) {
+        for (var y = 0; y < 10; y++) { for (var x = 0; x < 10; x++) {
+            if (tiles[y][x] == 2) {
+                var dir = rdir();
+                var y2 = y + dir.dy;
+                var x2 = x + dir.dx;
+                if (inside(x2, y2)) {
+                    tiles[y][x] = 1;
+                    tiles[y2][x2] = 2;
+                }
+            }
+        }}
+    }
+    // Splat
+    // Transform into real tile entities
+    for (var y = 0; y < 10; y++) { for (var x = 0; x < 10; x++) {
+      tiles[y][x] = {
+        type: tiles[y][x] > 0 ? "forest" : "fields",
+        fire: 0,
+        people: [0, 0, 0]
+      };
+    }}
+}
+
+function rint(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function inside(x, y) {
+    return y >= 0 && x >= 0 && y < 10 && x < 10;
+}
+
+function rdir() {
+    return directions[rint(0, directions.length)];
 }
 
 reset();
