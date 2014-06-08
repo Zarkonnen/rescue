@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Template</title>
+        <title>Rescue</title>
         <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
         <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     </head>
@@ -53,7 +53,41 @@ var tileTypes = {
 };
 
 var unitTypes = {
-    
+    bus: {
+        speed: 2,
+        capacity: 6,
+        flight: false,
+        heal: 0,
+        firefight: 0
+    },
+    car: {
+        speed: 3,
+        capacity: 3,
+        flight: false,
+        heal: 0,
+        firefight: 0
+    },
+    heli: {
+        speed: 4,
+        capacity: 2,
+        flight: true,
+        heal: 0,
+        firefight: 0
+    },
+    medic: {
+        speed: 3,
+        capacity: 0,
+        flight: false,
+        heal: 1,
+        firefight: 0
+    },
+    firefighter: {
+        speed: 2,
+        capacity: 0,
+        flight: false,
+        heal: 0,
+        firefight: 1
+    }
 };
 
 var g = null;
@@ -63,6 +97,11 @@ function reset() {
         tiles: [],
         units: []
     };
+    mapgen(g);
+}
+
+function mapgen(g) {
+    
 }
 
 reset();
