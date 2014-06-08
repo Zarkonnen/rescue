@@ -115,7 +115,10 @@ function update(msSinceLastUpdate) {
 }
 
 function draw() {
-    // TODO
+    for (var y = 0; y < g.tiles.length; y++) { for (var x = 0; x < g.tiles[y].length; x++) {
+        c.fillStyle = tileTypes[g.tiles[y][x].type].color;
+        c.fillRect(x * 80, y * 80, 80, 80);
+    }}
 }
 
 
