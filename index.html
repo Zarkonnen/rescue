@@ -104,20 +104,20 @@ function mapgen(g) {
     // Init tiles
     var tiles = [];
     g.tiles = tiles;
-    for (var y = 0; y < 10; y++) {
+    for (var y = 0; y < 16; y++) {
         var row = [];
         tiles.push(row);
-        for (var x = 0; x < 10; x++) {
+        for (var x = 0; x < 16; x++) {
             row.push(0);
         }
     }
     // Put down seeds
-    for (var i = 0; i < 10; i++) {
-        tiles[rint(0, 10)][rint(0, 10)] = 2;
+    for (var i = 0; i < 16; i++) {
+        tiles[rint(0, 16)][rint(0, 16)] = 2;
     }
     // Random walk seeds
     for (var i = 0; i < 10; i++) {
-        for (var y = 0; y < 10; y++) { for (var x = 0; x < 10; x++) {
+        for (var y = 0; y < 16; y++) { for (var x = 0; x < 16; x++) {
             if (tiles[y][x] == 2) {
                 var dir = rdir();
                 var y2 = y + dir.dy;
@@ -131,7 +131,7 @@ function mapgen(g) {
     }
     // Splat
     // Transform into real tile entities
-    for (var y = 0; y < 10; y++) { for (var x = 0; x < 10; x++) {
+    for (var y = 0; y < 16; y++) { for (var x = 0; x < 16; x++) {
       tiles[y][x] = {
         type: tiles[y][x] > 0 ? "forest" : "fields",
         fire: 0,
@@ -145,7 +145,7 @@ function rint(min, max) {
 }
 
 function inside(x, y) {
-    return y >= 0 && x >= 0 && y < 10 && x < 10;
+    return y >= 0 && x >= 0 && y < 16 && x < 16;
 }
 
 function rdir() {
@@ -165,7 +165,7 @@ function update(msSinceLastUpdate) {
 function draw() {
     for (var y = 0; y < g.tiles.length; y++) { for (var x = 0; x < g.tiles[y].length; x++) {
         c.fillStyle = tileTypes[g.tiles[y][x].type].color;
-        c.fillRect(x * 80, y * 80, 80, 80);
+        c.fillRect(x * 50, y * 50, 50, 50);
     }}
 }
 
