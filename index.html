@@ -118,18 +118,33 @@ function mapgen(g) {
     // Random walk seeds
     for (var i = 0; i < 10; i++) {
         for (var y = 0; y < 16; y++) { for (var x = 0; x < 16; x++) {
-            if (tiles[y][x] == 2) {
+            if (tiles[y][x] == 3) {
                 var dir = rdir();
                 var y2 = y + dir.dy;
                 var x2 = x + dir.dx;
                 if (inside(x2, y2)) {
-                    tiles[y][x] = 1;
-                    tiles[y2][x2] = 2;
+                    tiles[y][x] = 2;
+                    tiles[y2][x2] = 3;
                 }
             }
         }}
     }
     // Splat
+    for (var y = 0; y < 16; y++) { for (var x = 0; x < 16; x++) {
+        if (tiles[y][x] == 0) {
+            var count = 0;
+            directions.forEach(function(d) {
+                var x2 = x + d.dx;
+                var y2 = y + d.dy;
+                if (inside(x2, y2) && tiles[y2][x2] > 1) {
+                    count++;
+                }
+            });
+            if (count > 2) {
+                tiles[y][x] = 1;
+            }
+        }
+    }}
     // Transform into real tile entities
     for (var y = 0; y < 16; y++) { for (var x = 0; x < 16; x++) {
       tiles[y][x] = {
